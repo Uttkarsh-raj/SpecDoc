@@ -1,9 +1,9 @@
 class Categories {
-  final String title;
-  final String desc;
+  final String? title;
+  final String? desc;
   Categories({
-    required this.title,
-    required this.desc,
+    this.title,
+    this.desc,
   });
 
   Categories copyWith({
@@ -17,13 +17,13 @@ class Categories {
   }
 
   Categories fromJSON(dynamic json) {
-    return Categories(title: json['categories'], desc: json['description']);
+    return Categories(title: json['category'], desc: json['description']);
   }
 
   List<Categories> fromListJson(List<dynamic> response) {
     return response
         .map((category) => Categories(
-            title: category["categories"], desc: category["description"]))
+            title: category["category"], desc: category["description"]))
         .toList();
   }
 
