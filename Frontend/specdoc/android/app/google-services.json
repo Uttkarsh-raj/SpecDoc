@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "833898580463",
+    "project_id": "specdoctask",
+    "storage_bucket": "specdoctask.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:833898580463:android:fc3eec0c78cd543aaece1a",
+        "android_client_info": {
+          "package_name": "com.exampleproj.specdoc"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5iwE_QKyzx0h2f6-FX8b1U9NiKaKlK0I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

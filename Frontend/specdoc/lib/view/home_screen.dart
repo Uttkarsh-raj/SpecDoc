@@ -71,11 +71,11 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: const Drawer(),
       body: Consumer<CategoriesList>(
         builder: (context, categoriesListModel, child) => SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: (!loading)
-                ? SingleChildScrollView(
-                    child: Column(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: (!loading)
+                  ? Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
@@ -83,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           width: size.width * 0.93,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(25),
-                            color: AppColors.lightGrey.withOpacity(0.5),
+                            color: AppColors.lightGrey.withOpacity(0.7),
                           ),
                           child: TextField(
                             decoration: const InputDecoration(
@@ -161,9 +161,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                       ],
-                    ),
-                  )
-                : const Center(child: CircularProgressIndicator()),
+                    )
+                  : const Center(child: CircularProgressIndicator()),
+            ),
           ),
         ),
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:specdoc/utils/colors.dart';
+import 'package:specdoc/view/doctors_screen.dart';
 
 class CategoriesListTile extends StatelessWidget {
   const CategoriesListTile(
@@ -10,9 +11,18 @@ class CategoriesListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Container(
-      width: size.width * 0.93,
-      decoration: BoxDecoration(
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) =>
+                DoctorsScreen(category: title, description: desc),
+          ),
+        );
+      },
+      child: Container(
+        width: size.width * 0.93,
+        decoration: BoxDecoration(
           // color: AppColors.darkGreen.withOpacity(0.9),
           borderRadius: BorderRadius.circular(18),
           gradient: const LinearGradient(
@@ -30,33 +40,35 @@ class CategoriesListTile extends StatelessWidget {
               blurRadius: 10,
               spreadRadius: 0.3,
             )
-          ]),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: const TextStyle(
-                fontWeight: FontWeight.w500,
-                color: AppColors.white,
-                fontSize: 22,
-              ),
-            ),
-            const SizedBox(height: 10),
-            SizedBox(
-              width: size.width * 0.7,
-              child: Text(
-                desc,
-                maxLines: 3,
+          ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
                 style: const TextStyle(
+                  fontWeight: FontWeight.w500,
                   color: AppColors.white,
-                  fontSize: 16,
+                  fontSize: 22,
                 ),
               ),
-            ),
-          ],
+              const SizedBox(height: 10),
+              SizedBox(
+                width: size.width * 0.7,
+                child: Text(
+                  desc,
+                  maxLines: 3,
+                  style: const TextStyle(
+                    color: AppColors.white,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
