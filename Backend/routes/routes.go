@@ -7,5 +7,5 @@ import (
 
 func Routes(incomingRoutes *gin.Engine) {
 	incomingRoutes.GET("/categories", controllers.GetCategories())
-	incomingRoutes.GET("/search", controllers.SearchCategory())
+	incomingRoutes.POST("/search", controllers.SearchCategory())
 }
