@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:specdoc/data/firebase_database.dart';
+import 'package:specdoc/models/doctors.dart';
 import 'package:specdoc/utils/colors.dart';
 
 class DoctorsScreen extends StatefulWidget {
@@ -13,7 +14,8 @@ class DoctorsScreen extends StatefulWidget {
 }
 
 class _DoctorsScreenState extends State<DoctorsScreen> {
-  Map<String, dynamic>? doctors;
+  late Map<String, dynamic> doctors;
+  List<Doctor> docs = [];
   bool loading = true;
 
   void getDoctors() async {
@@ -21,6 +23,13 @@ class _DoctorsScreenState extends State<DoctorsScreen> {
       loading = true;
     });
     doctors = await FirebaseFuncs().getDoctorsData(widget.category);
+    if (doctors.isNotEmpty) {}
+    doctors.forEach(
+      (key, value) {
+        var d = Doctor.fromMap(value);
+        docs.add(d);
+      },
+    );
     setState(() {
       loading = false;
     });
@@ -97,6 +106,31 @@ class _DoctorsScreenState extends State<DoctorsScreen> {
               ),
             ),
             SizedBox(height: size.height * 0.02),
+            (!loading)
+                ? Column(
+                    children: [
+                      if (docs.isNotEmpty)
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: docs.length,
+                          itemBuilder: (context, index) => ListTile(
+                            title: Text('${docs[index].name}'),
+                            subtitle: Text('${docs[index].email}'),
+                          ),
+                        ),
+                      if (docs.isEmpty)
+                        const Text(
+                          'No doctors present.',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            color: AppColors.black,
+                            fontSize: 18,
+                          ),
+                        ),
+                    ],
+                  )
+                : const Center(child: CircularProgressIndicator()),
           ],
         ),
       ),
