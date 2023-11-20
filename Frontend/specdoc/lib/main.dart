@@ -30,10 +30,6 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'SpecDoc',
         debugShowCheckedModeBanner: false,
-        // theme: ThemeData(
-        //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        //   useMaterial3: true,
-        // ),
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
             seedColor: AppColors.lightGreen.withOpacity(0.3),

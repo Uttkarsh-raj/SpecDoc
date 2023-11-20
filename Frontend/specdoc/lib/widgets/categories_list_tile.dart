@@ -29,8 +29,10 @@ class CategoriesListTile extends StatelessWidget {
             begin: Alignment.bottomLeft,
             end: Alignment.topRight,
             colors: [
-              AppColors.darkGreen,
-              AppColors.lightGreen,
+              // AppColors.darkGreen,
+              // AppColors.lightGreen,
+              Color.fromRGBO(27, 94, 32, 1),
+              Colors.green,
             ],
           ),
           boxShadow: [

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:specdoc/data/firebase_database.dart';
 import 'package:specdoc/models/doctors.dart';
+import 'package:specdoc/services/apis.dart';
 import 'package:specdoc/utils/colors.dart';
+import 'package:specdoc/widgets/doctors_list_tile.dart';
 
 class DoctorsScreen extends StatefulWidget {
   const DoctorsScreen(
@@ -18,11 +20,13 @@ class _DoctorsScreenState extends State<DoctorsScreen> {
   List<Doctor> docs = [];
   bool loading = true;
 
+  List<String> bookings = [];
   void getDoctors() async {
     setState(() {
       loading = true;
     });
     doctors = await FirebaseFuncs().getDoctorsData(widget.category);
+    bookings = await FirebaseFuncs().getBookingsData(ApiCalls.email);
     if (doctors.isNotEmpty) {}
     doctors.forEach(
       (key, value) {
@@ -38,6 +42,7 @@ class _DoctorsScreenState extends State<DoctorsScreen> {
   @override
   void initState() {
     getDoctors();
+
     super.initState();
   }
 
@@ -110,13 +115,17 @@ class _DoctorsScreenState extends State<DoctorsScreen> {
                 ? Column(
                     children: [
                       if (docs.isNotEmpty)
-                        ListView.builder(
+                        ListView.separated(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: docs.length,
-                          itemBuilder: (context, index) => ListTile(
-                            title: Text('${docs[index].name}'),
-                            subtitle: Text('${docs[index].email}'),
+                          itemBuilder: (context, index) => DoctorsListTile(
+                              bookings: bookings,
+                              name: '${docs[index].name}',
+                              email: '${docs[index].email}',
+                              desc: '${docs[index].desc}'),
+                          separatorBuilder: (context, index) => SizedBox(
+                            height: size.height * 0.02,
                           ),
                         ),
                       if (docs.isEmpty)

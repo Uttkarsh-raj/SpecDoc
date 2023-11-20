@@ -68,7 +68,100 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      drawer: const Drawer(),
+      drawer: Drawer(
+        child: SafeArea(
+          child: Column(
+            children: [
+              SizedBox(
+                height: size.height * 0.2,
+                width: size.width * 0.5,
+                child: Image.asset(
+                  'assets/images/logo.png',
+                ),
+              ),
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Spec',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w800,
+                      color: Colors.green[800],
+                      fontSize: 39,
+                    ),
+                  ),
+                  const Text(
+                    'Doc',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w800,
+                      color: AppColors.black,
+                      fontSize: 39,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: size.height * 0.02),
+              Padding(
+                padding: const EdgeInsets.all(8.0).copyWith(bottom: 0),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.home_outlined,
+                    ),
+                    const SizedBox(width: 10),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const HomeScreen(),
+                          ),
+                        );
+                      },
+                      child: const Text(
+                        'Home',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.black,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0).copyWith(top: 0, bottom: 0),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.search_outlined,
+                    ),
+                    const SizedBox(width: 10),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const HomeScreen(),
+                          ),
+                        );
+                      },
+                      child: const Text(
+                        'Search',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.black,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
       body: Consumer<CategoriesList>(
         builder: (context, categoriesListModel, child) => SafeArea(
           child: SingleChildScrollView(

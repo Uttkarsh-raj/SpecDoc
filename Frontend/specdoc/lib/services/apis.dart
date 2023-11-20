@@ -4,6 +4,7 @@ import 'package:specdoc/models/categories.dart';
 
 class ApiCalls {
   var baseUrl = 'http://192.168.2.52:8000';
+  static const String email = 'test@gmail.com';
   List<String> title = [];
   List<String> desc = [];
 
