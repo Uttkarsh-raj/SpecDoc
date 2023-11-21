@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:specdoc/data/firebase_database.dart';
 import 'package:specdoc/models/categories.dart';
 import 'package:specdoc/providers/provider.dart';
 import 'package:specdoc/services/apis.dart';
 import 'package:specdoc/utils/colors.dart';
 import 'package:specdoc/widgets/categories_list_tile.dart';
+import 'package:specdoc/widgets/check_auth.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -72,17 +74,17 @@ class _HomeScreenState extends State<HomeScreen> {
         child: SafeArea(
           child: Column(
             children: [
-              SizedBox(
-                height: size.height * 0.2,
-                width: size.width * 0.5,
-                child: Image.asset(
-                  'assets/images/logo.png',
-                ),
-              ),
               const SizedBox(height: 10),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  SizedBox(
+                    height: size.height * 0.1,
+                    width: size.width * 0.17,
+                    child: Image.asset(
+                      'assets/images/logo_removebg.png',
+                    ),
+                  ),
+                  const SizedBox(width: 10),
                   Text(
                     'Spec',
                     style: TextStyle(
@@ -148,6 +150,35 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                       child: const Text(
                         'Search',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.black,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0).copyWith(top: 0, bottom: 0),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.logout_outlined,
+                    ),
+                    const SizedBox(width: 10),
+                    TextButton(
+                      onPressed: () {
+                        FirebaseFuncs.logOut();
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => const CheckAuth(),
+                          ),
+                        );
+                      },
+                      child: const Text(
+                        'Logout',
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
                           color: AppColors.black,

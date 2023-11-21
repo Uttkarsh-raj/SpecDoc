@@ -1,6 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:specdoc/data/firebase_database.dart';
-import 'package:specdoc/services/apis.dart';
 import 'package:specdoc/utils/colors.dart';
 
 class DoctorsListTile extends StatefulWidget {
@@ -25,7 +25,8 @@ class _DoctorsListTileState extends State<DoctorsListTile> {
     setState(() {
       loading = true;
     });
-    await FirebaseFuncs().addBookings(ApiCalls.email, widget.email);
+    var user = FirebaseAuth.instance.currentUser;
+    await FirebaseFuncs().addBookings("${user?.email}", widget.email);
     var snackbar = SnackBar(
       backgroundColor: Colors.green[800],
       content: const Text(

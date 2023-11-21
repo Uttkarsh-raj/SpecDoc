@@ -1,7 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:specdoc/data/firebase_database.dart';
 import 'package:specdoc/models/doctors.dart';
-import 'package:specdoc/services/apis.dart';
 import 'package:specdoc/utils/colors.dart';
 import 'package:specdoc/widgets/doctors_list_tile.dart';
 
@@ -25,18 +25,33 @@ class _DoctorsScreenState extends State<DoctorsScreen> {
     setState(() {
       loading = true;
     });
-    doctors = await FirebaseFuncs().getDoctorsData(widget.category);
-    bookings = await FirebaseFuncs().getBookingsData(ApiCalls.email);
-    if (doctors.isNotEmpty) {}
-    doctors.forEach(
-      (key, value) {
-        var d = Doctor.fromMap(value);
-        docs.add(d);
-      },
-    );
-    setState(() {
-      loading = false;
-    });
+    var user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      doctors = await FirebaseFuncs().getDoctorsData(widget.category);
+      bookings = await FirebaseFuncs().getBookingsData(user.email!);
+      if (doctors.isNotEmpty) {}
+      doctors.forEach(
+        (key, value) {
+          var d = Doctor.fromMap(value);
+          docs.add(d);
+        },
+      );
+      setState(() {
+        loading = false;
+      });
+    } else {
+      var snackbar = const SnackBar(
+        backgroundColor: Colors.red,
+        content: Text(
+          'Invalid user. Please relogin.',
+          style: TextStyle(
+            color: AppColors.white,
+            fontSize: 14,
+          ),
+        ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackbar);
+    }
   }
 
   @override

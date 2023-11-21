@@ -4,8 +4,8 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 import 'package:specdoc/firebase_options.dart';
 import 'package:specdoc/providers/provider.dart';
-import 'package:specdoc/view/home_screen.dart';
 import 'package:specdoc/utils/colors.dart';
+import 'package:specdoc/widgets/check_auth.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
             seedColor: AppColors.lightGreen.withOpacity(0.3),
           ),
         ),
-        home: const HomeScreen(),
+        home: const CheckAuth(),
       ),
     );
   }
